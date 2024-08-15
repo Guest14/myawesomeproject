@@ -1,11 +1,12 @@
 const express = require("express");
 const { WebSocketServer } = require("ws");
 const app = express();
+const port = process.env.PORT || 10000;
 
 app.use(express.static('public'));
 
-app.listen(8000, () => {
-    console.log('8000');
+app.listen(port, () => {
+    console.log(port);
 })
 
 
