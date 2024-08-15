@@ -10,7 +10,7 @@ app.listen(port, () => {
 })
 
 
-const wss = new WebSocketServer({ port : 8001 });
+const wss = new WebSocketServer({ port : 10000 });
 
 wss.on("connection", (ws,request) => {
     wss.clients.forEach(client => {
