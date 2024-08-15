@@ -1,12 +1,19 @@
 const express = require("express");
 const { WebSocketServer } = require("ws");
 const app = express();
+const port = process.env.PORT || 10000;
+var ip = process.env.IP || '0,0,0,0';
 
-app.use(express.static('public'));
 
-app.listen(8000, () => {
-    console.log('8000');
-})
+
+
+app.use("/", function(req, res){
+    res.sendfile(__dirname + '/index.html');
+});
+
+app.listen(port, ip => {
+    console.log(port);
+});
 
 
 const wss = new WebSocketServer({ port : 8001 });

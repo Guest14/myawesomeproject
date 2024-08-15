@@ -5,9 +5,6 @@
         <script>
             const ws = new WebSocket("ws://localhost:8001")
 
-            function sayHi(){
-                ws.send("Hello")
-            }
             
             function inputEnter(){
                 let key = event.key || event.keyCode;
