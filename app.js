@@ -2,15 +2,16 @@ const express = require("express");
 const { WebSocketServer } = require("ws");
 const app = express();
 const port = process.env.PORT || 10000;
+var ip = process.env.IP || '0,0,0,0';
 
 app.use(express.static('public'));
 
-app.listen(port, () => {
+app.listen(port, ip => {
     console.log(port);
 })
 
 
-const wss = new WebSocketServer({ port : 10000 });
+const wss = new WebSocketServer({ port : 8001 });
 
 wss.on("connection", (ws,request) => {
     wss.clients.forEach(client => {
