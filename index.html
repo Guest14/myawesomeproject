@@ -3,8 +3,9 @@
     <head>
         <title>chat</title>
         <script>
-            const ws = new WebSocket("ws://localhost:8001")
-            //const ws = new WebSocket("https://echo.websocket.org/") 
+            var HOST = location.origin.replace(/^http/, 'ws')
+            var ws = new WebSocket(HOST);
+             
             
             function inputEnter(){
                 let key = event.key || event.keyCode;

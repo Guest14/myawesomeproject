@@ -1,22 +1,16 @@
 const express = require("express");
 const { WebSocketServer } = require("ws");
 const app = express();
-const port = process.env.PORT || 10000;
-var ip = process.env.IP || '0,0,0,0';
+
+const PORT = process.env.PORT || 8000;
+const INDEX = '/index.html';
+
+const server = express()
+    .use((req, res) => res.sendFile(INDEX, {root: __dirname}))
+    .listen(PORT, () => console.log(`listening on ${PORT}`));
 
 
-
-
-app.use("/", function(req, res){
-    res.sendfile(__dirname + '/index.html');
-});
-
-app.listen(port, ip => {
-    console.log(port);
-});
-
-
-const wss = new WebSocketServer({ port:8001 });
+const wss = new WebSocketServer({ server });
 
 wss.on("connection", (ws,request) => {
     wss.clients.forEach(client => {
