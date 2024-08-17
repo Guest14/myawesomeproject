@@ -33,6 +33,7 @@
             function receivemessage(){
                 const chat = document.createElement("div");
                 const message = document.createTextNode(event.data);
+                console.log(event.data);
 
                 if ((event.data).includes(': ')){
                     chat.appendChild(message);
