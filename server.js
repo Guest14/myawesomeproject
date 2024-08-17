@@ -2,14 +2,15 @@ const express = require("express");
 const { WebSocketServer } = require("ws");
 const app = express();
 
-app.use(express.static('public'));
+const PORT = process.env.PORT || 8000;
+const INDEX = '/index.html';
 
-app.listen(8000, () => {
-    console.log('8000');
-})
+const server = express()
+    .use((req, res) => res.sendFile(INDEX, {root: __dirname}))
+    .listen(PORT, () => console.log(`listening on ${PORT}`));
 
 
-const wss = new WebSocketServer({ port : 8001 });
+const wss = new WebSocketServer({ server });
 
 wss.on("connection", (ws,request) => {
     wss.clients.forEach(client => {
