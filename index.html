@@ -3,9 +3,11 @@
     <head>
         <title>chat</title>
         <script>
-            var HOST = location.origin.replace(/^http/, 'ws')
-            var ws = new WebSocket(HOST);
-             
+            const ws = new WebSocket("ws://localhost:8001")
+
+            function sayHi(){
+                ws.send("Hello")
+            }
             
             function inputEnter(){
                 let key = event.key || event.keyCode;
@@ -25,9 +27,10 @@
                 if(message.trim().length*nickname.trim().length > 0){
                     fullmessage = nickname+": "+message
                     ///chat.innerHTML += "<div>"+fullmessage+"</div>"
+                    chat.scrollTop=chat.scrollHeight;
+                    document.getElementById("message").value="";
                     ws.send(fullmessage);
                 }
-                document.getElementById("message").value="";
             }
 
             function receivemessage(){
@@ -37,7 +40,6 @@
 
                 const chang = document.getElementById("chattingchang");
                 chang.appendChild(chat)
-                chang.scrollTop=chang.scrollHeight;
             }
 
             ws.onmessage = receivemessage
