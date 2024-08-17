@@ -5,7 +5,25 @@
         <script>
             var HOST = location.origin.replace(/^http/, 'ws')
             var ws = new WebSocket(HOST);
-             
+            
+
+            function datetime(){
+                var today = new Date();
+
+                var year = today.getFullYear();
+                var month = ('0' + (today.getMonth() + 1)).slice(-2);
+                var day = ('0' + today.getDate()).slice(-2);
+
+                var dateString = year + '-' + month  + '-' + day;
+
+                var hours = ('0' + today.getHours()).slice(-2); 
+                var minutes = ('0' + today.getMinutes()).slice(-2);
+                var seconds = ('0' + today.getSeconds()).slice(-2); 
+
+                var timeString = hours + ':' + minutes  + ':' + seconds;
+
+                return dateString+' '+timeString;
+            }
             
             function inputEnter(){
                 let key = event.key || event.keyCode;
@@ -33,7 +51,7 @@
             function receivemessage(){
                 const chat = document.createElement("div");
                 const message = document.createTextNode(event.data);
-                console.log(event.data);
+                console.log(datetime()+', '+event.data);
 
                 if ((event.data).includes(': ')){
                     chat.appendChild(message);
@@ -53,11 +71,13 @@
             </script>
     </head>
     <body>
+        <div style="width:1500px; height:700px">
         <p><div id="chattingchang" style="width:412px; height:500px; border: 3px solid black; background-color: white; overflow:auto"></div></p>
         <p>닉네임 <input type="text" id="nickname"></p>
         <input type="text" size="50" id="message" onkeyup="inputEnter()">
         <button onclick="sendmessage()">전송</button>
         <p id="howmanyuser"></p>
+        </div>
     </body>
 
 </html>
