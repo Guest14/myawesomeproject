@@ -16,7 +16,7 @@
             }
             
             
-            function sendmessage(){           
+            function sendmessage(){
                 const nickname= document.getElementById('nickname').value;
                 const chat = document.getElementById('chattingchang');
                 const message = document.getElementById('message').value;
@@ -33,11 +33,17 @@
             function receivemessage(){
                 const chat = document.createElement("div");
                 const message = document.createTextNode(event.data);
-                chat.appendChild(message)
 
-                const chang = document.getElementById("chattingchang");
-                chang.appendChild(chat)
-                chang.scrollTop=chang.scrollHeight;
+                if ((event.data).includes(': ')){
+                    chat.appendChild(message);
+                    const chang = document.getElementById("chattingchang");
+                    chang.appendChild(chat);
+                    chang.scrollTop=chang.scrollHeight;
+                }
+                else{
+                    document.getElementById("howmanyuser").innerHTML=`접속자 수: ${event.data}`;
+
+                }
             }
 
             ws.onmessage = receivemessage
@@ -50,6 +56,7 @@
         <p>닉네임 <input type="text" id="nickname"></p>
         <input type="text" size="50" id="message" onkeyup="inputEnter()">
         <button onclick="sendmessage()">전송</button>
+        <p id="howmanyuser"></p>
     </body>
 
 </html>

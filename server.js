@@ -14,14 +14,14 @@ const wss = new WebSocketServer({ server });
 
 wss.on("connection", (ws,request) => {
     wss.clients.forEach(client => {
-        client.send('new user'+wss.clients.size);
+        client.send(wss.clients.size);
     })
 
     console.log('new user'+request.socket.remoteAddress);
 
     ws.on("close", () => {
         wss.clients.forEach((client) => {
-            client.send('user out'+wss.clients.size);
+            client.send(wss.clients.size);
         })
     })
 
